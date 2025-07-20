@@ -120,4 +120,105 @@ class child(AbstractClass):
         #instructions
 ```
 
-Now we have eveyrhting we need to implement some animals.
+### Animals
+> Now we have eveyrhting we need to implement some animals.
+> So an Animal is not a concrete object, a cat is. An animal is just a concept, it answers the "what is it"
+> for instance, all animals have a name, they can all eat, sleep, walk and produce a sound
+> however they may not do it the same way, a cat meows  and a dog barks for example, but they sleep the same way.
+> So instead of making 2 classes for cat and dog with the exact same code except for the sound method we can have an abstract animal class that defines the common methods and then have a concrete class for our animals in which we'll describe the specific methods like sound in our example
+
+
+```python
+from abc import ABC, abstractmethod
+
+class Animal(ABC):
+
+    def __init__(self, name):
+        self.name = name # name is public
+    
+    # animals can make a sound, but they dont't all make the same so it's abstract
+    @abstractmethod
+    def sound(self):
+        pass
+
+    # animals eat 
+    def eat(self):
+        print("yum i was hungry")
+    
+    # animals sleep
+    def sleep(self):
+        print("zzzz i was tired zzzz")
+
+
+#children
+class Cow(Animal):
+    def sound(self):
+        print("meuuuuh")
+
+    def __str__(self):
+        return f"hi i'm a cow my name is {self.name}"
+    
+class Dog(Animal):
+    def sound(self):
+        print("wouf wouf")
+
+    def __str__(self):
+        return f"hi i'm a dog my name is {self.name}"
+
+class Cat(Animal):
+    def sound(self):
+        print("meow meow")
+
+    def __str__(self):
+        return f"hi i'm a cat my name is {self.name}"
+
+#instanciate animals
+cow0 = Cow("Dolores")
+dog0 = Dog("Pluto")
+cat0 = Cat("kitty")
+
+animals = [cow0, dog0, cat0]
+
+for i in animals:
+    print(i)
+    i.eat()
+    i.sound() 
+    print("\n")
+```
+This enables us to have a table containing all our animals because they're all of a parent type `animal`, we wouldn't be able to do that with only cat and dog classes.
+But in the for loop, when the method is called the system first checks in the concrete class if it's defined.
+Se we have:
+```terminal
+hi i'm a cow my name is Dolores
+yum i was hungry
+meuuuuh
+
+hi i'm a dog my name is Pluto
+yum i was hungry
+wouf wouf
+
+hi i'm a cat my name is kitty
+yum i was hungry
+meow meow
+```
+
+## Now the actual budget App
+> I'm using a [youtube tutorial](https://www.youtube.com/watch?v=I8S9V8AYjtA) **only** to get some general directions, i'm not going to copy paste it.
+
+### App design: pyQt
+- QWidget : windows seen by the user
+- QLabel : text on the screen
+- QPishButton : buttons
+- QLineEdit : input box
+- QComboBox: dorpdown selection
+- QTableWidget: speadsheet
+- QVBoxLayout : colunms
+- QHBoxLayout : rowns
+- QMessageBox : popups
+- QTableWidgetItem 
+- QHeadrView : style the table
+
+QTCOre 
+- QDate 
+- Qt : alignments 
+
